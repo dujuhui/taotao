@@ -24,7 +24,7 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping("/{itemId}")
+	@RequestMapping("getItemById/{itemId}")
 	@ResponseBody
 	public TbItem getItemById(@PathVariable Long itemId) {
 		TbItem tbItem = itemService.getItemById(itemId);

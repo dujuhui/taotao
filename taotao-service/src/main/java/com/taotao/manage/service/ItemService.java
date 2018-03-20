@@ -13,7 +13,7 @@ public interface ItemService {
 
 	String REQUEST_PREFIX = "item";
 	/**
-	 * 判断商品是否是自己的
+	 *
 	 */
 	@GetMapping(value = REQUEST_PREFIX + "/getItemById")
 	TbItem getItemById(@RequestParam("itemId") Long itemId);
