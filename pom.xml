@@ -22,6 +22,7 @@
 		<module>taotao-manage</module>
 		<module>taotao-manage-web</module>
 		<module>eureka-server</module>
+		<module>taotao-portal-web</module>
 	</modules>
 
 	<properties>
