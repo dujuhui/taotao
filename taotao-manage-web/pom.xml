@@ -50,6 +50,10 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>fastdfs_client</groupId>
 			<artifactId>fastdfs_client</artifactId>
 			<version>1.25</version>
