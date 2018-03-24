@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.taotao</groupId>
-	<artifactId>taotao-manage-web</artifactId>
+	<artifactId>taotao-portal-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>taotao-manage-web</name>
+	<name>taotao-portal-web</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -23,8 +23,8 @@
 			<artifactId>taotao-common</artifactId>
 		</dependency>
 		<dependency>
-		<groupId>com.taotao</groupId>
-		<artifactId>taotao-service</artifactId>
+			<groupId>com.taotao</groupId>
+			<artifactId>taotao-service</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -50,14 +50,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!--<dependency>
+		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>fastdfs_client</groupId>
 			<artifactId>fastdfs_client</artifactId>
 			<version>1.25</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

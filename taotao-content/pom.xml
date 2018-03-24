@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.taotao</groupId>
-	<artifactId>taotao-manage-web</artifactId>
+	<artifactId>taotao-content</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>taotao-manage-web</name>
+	<name>taotao-content</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -18,46 +18,35 @@
 	</parent>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.taotao</groupId>
+			<artifactId>taotao-service</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.taotao</groupId>
 			<artifactId>taotao-common</artifactId>
-		</dependency>
-		<dependency>
-		<groupId>com.taotao</groupId>
-		<artifactId>taotao-service</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-feign</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<!--<dependency>
-			<groupId>net.sourceforge.nekohtml</groupId>
-			<artifactId>nekohtml</artifactId>
-		</dependency>-->
-		<dependency>
-			<groupId>fastdfs_client</groupId>
-			<artifactId>fastdfs_client</artifactId>
-			<version>1.25</version>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
 		</dependency>
 	</dependencies>
 
