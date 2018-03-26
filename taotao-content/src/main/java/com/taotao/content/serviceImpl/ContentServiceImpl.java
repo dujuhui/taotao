@@ -11,6 +11,7 @@ import com.taotao.manage.service.ContentService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.taotao.common.utils.JsonUtils;
@@ -26,8 +27,11 @@ public class ContentServiceImpl implements ContentService {
 	/*@Autowired
 	private JedisClient jedisClient;*/
 
-	/*@Value("${INDEX_CONTENT}")
-	private String INDEX_CONTENT;*/
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	@Value("${INDEX_CONTENT}")
+	private String INDEX_CONTENT;
 
 	@Override
 	public TaotaoResult addContent(@RequestBody TbContent content) {
@@ -38,7 +42,7 @@ public class ContentServiceImpl implements ContentService {
 		contentMapper.insert(content);
 		//同步缓存
 		//删除对应的缓存信息
-//		jedisClient.hdel(INDEX_CONTENT, content.getCategoryId().toString());
+		redisTemplate.opsForHash().delete(INDEX_CONTENT, content.getCategoryId().toString());
 		return TaotaoResult.ok();
 	}
 
@@ -46,17 +50,17 @@ public class ContentServiceImpl implements ContentService {
 	public List<TbContent> getContentByCid(Long cid) {
 		//先查询缓存
 		//添加缓存不能影响正常业务逻辑
-		/*try {
+		try {
 			//查询缓存
-			String json = jedisClient.hget(INDEX_CONTENT, cid + "");
+			String json = (String)redisTemplate.opsForHash().get(INDEX_CONTENT, cid + "");
 			//查询到结果，把json转换成List返回
-			if (StringUtils.isNotBlank(json)) {
+			if (StringUtils.isNotBlank(json) && !json.equals("null")) {
 				List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
 				return list;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 		//缓存中没有命中，需要查询数据库
 		TbContentExample example = new TbContentExample();
 		TbContentExample.Criteria criteria = example.createCriteria();
@@ -65,11 +69,11 @@ public class ContentServiceImpl implements ContentService {
 		//执行查询
 		List<TbContent> list = contentMapper.selectByExample(example);
 		//把结果添加到缓存
-		/*try {
-			jedisClient.hset(INDEX_CONTENT, cid + "", JsonUtils.objectToJson(list));
+		try {
+			redisTemplate.opsForHash().put(INDEX_CONTENT, cid + "", JsonUtils.objectToJson(list));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 		//返回结果
 		return list;
 	}
