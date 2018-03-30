@@ -34,7 +34,7 @@ public class SearchController {
 		//int a = 1/0;
 		//调用服务执行查询
 		//把查询条件进行转码，解决get乱码问题
-		queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
+//		queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
 		SearchResult searchResult = searchService.search(queryString, page, SEARCH_RESULT_ROWS);
 		//把结果传递给页面
 		model.addAttribute("query", queryString);
