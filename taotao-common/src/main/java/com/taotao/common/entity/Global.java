@@ -19,5 +19,8 @@ public class Global {
     /**
      * 服务 分组名称
      */
-    public static final String TAOTAO_SEARCH= "taotao-search";
+    public static final String TAOTAO_SEARCH= "taotao-search"; /**
+     * 服务 分组名称
+     */
+    public static final String TAOTAO_SSO= "taotao-sso";
 }
