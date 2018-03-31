@@ -45,7 +45,10 @@ public class SearchDao {
 			SearchItem item = new SearchItem();
 			item.setCategory_name((String) solrDocument.get("item_category_name"));
 			item.setId((String) solrDocument.get("id"));
-			item.setImage((String) solrDocument.get("item_image"));
+			String images =(String) solrDocument.get("item_image");
+			if(images != null){
+				item.setImage(images.split(",")[0]);
+			}
 			item.setPrice((long) solrDocument.get("item_price"));
 			item.setSell_point((String) solrDocument.get("item_sell_point"));
 			//取高亮显示

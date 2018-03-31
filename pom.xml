@@ -157,7 +157,11 @@
 				<artifactId>spring-boot-starter-data-solr</artifactId>
 				<version>1.5.10.RELEASE</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-activemq</artifactId>
+				<version>1.5.10.RELEASE</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>

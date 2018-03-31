@@ -12,6 +12,7 @@ import com.taotao.manage.pojo.TbItemDesc;
 import com.taotao.manage.pojo.TbItemExample;
 import com.taotao.manage.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,8 @@ import java.util.List;
 @RestController
 public class ItemServiceImpl implements ItemService {
 
+	@Autowired
+	private JmsTemplate jmsTemplate;
 
 	@Autowired
 	private TbItemMapper itemMapper;
@@ -82,6 +85,7 @@ public class ItemServiceImpl implements ItemService {
 		//向商品描述表插入数据
 		itemDescMapper.insert(itemDesc);
 		//向Activemq发送商品添加消息
+		jmsTemplate.convertAndSend("itemId", itemId);
 		/*jmsTemplate.send(destination, new MessageCreator() {
 
 			@Override

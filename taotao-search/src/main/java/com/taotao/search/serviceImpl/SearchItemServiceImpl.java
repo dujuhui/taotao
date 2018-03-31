@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 商品数据导入索引库
  * <p>Title: SearchItemServiceImpl</p>
  * <p>Description: </p>
- * <p>Company: www.itcast.cn</p> 
+ * <p>Company: www.itcast.cn</p>
  * @version 1.0
  */
 @RestController
@@ -27,7 +27,7 @@ public class SearchItemServiceImpl implements SearchItemService {
 	private SearchItemMapper searchItemMapper;
 	@Autowired
 	private HttpSolrServer solrServer;
-	
+
 	@Override
 	public TaotaoResult importItemsToIndex() {
 		try {
