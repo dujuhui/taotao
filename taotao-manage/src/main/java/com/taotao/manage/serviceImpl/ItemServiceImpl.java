@@ -5,19 +5,24 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.common.entity.EasyUIDataGridResult;
 import com.taotao.common.entity.TaotaoResult;
 import com.taotao.common.utils.IDUtils;
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.manage.mapper.TbItemDescMapper;
 import com.taotao.manage.mapper.TbItemMapper;
 import com.taotao.manage.pojo.TbItem;
 import com.taotao.manage.pojo.TbItemDesc;
 import com.taotao.manage.pojo.TbItemExample;
 import com.taotao.manage.service.ItemService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -39,6 +44,14 @@ public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private TbItemDescMapper itemDescMapper;
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	@Value("ITEM_INFO")
+	private String ITEM_INFO;
+
+	@Value("TIEM_EXPIRE")
+	private String TIEM_EXPIRE;
 
 	@Override
 	public TbItem getItemById(Long itemId) {
@@ -99,4 +112,30 @@ public class ItemServiceImpl implements ItemService {
 		return TaotaoResult.ok();
 	}
 
+
+	@Override
+	public TbItemDesc getItemDescById(Long itemId) {
+		//查询数据库之前先查询缓存
+		try {
+			String json = (String) redisTemplate.opsForValue().get(ITEM_INFO + ":" + itemId  + ":DESC");
+			if (StringUtils.isNotBlank(json)) {
+				// 把json数据转换成pojo
+				TbItemDesc tbItemDesc = JsonUtils.jsonToPojo(json, TbItemDesc.class);
+				return tbItemDesc;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//缓存中没有查询数据库
+		TbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(itemId);
+		try {
+			//把查询结果添加到缓存
+			redisTemplate.opsForValue().set(ITEM_INFO + ":" + itemId  + ":DESC", JsonUtils.objectToJson(itemDesc));
+			//设置过期时间，提高缓存的利用率
+			redisTemplate.expire(ITEM_INFO + ":" + itemId  + ":DESC", Long.parseLong(TIEM_EXPIRE), TimeUnit.SECONDS);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return itemDesc;
+	}
 }

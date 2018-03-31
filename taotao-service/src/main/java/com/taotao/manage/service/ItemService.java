@@ -5,6 +5,7 @@ import com.taotao.common.entity.EasyUIDataGridResult;
 import com.taotao.common.entity.Global;
 import com.taotao.common.entity.TaotaoResult;
 import com.taotao.manage.pojo.TbItem;
+import com.taotao.manage.pojo.TbItemDesc;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,4 +39,12 @@ public interface ItemService {
 	 */
 	@RequestMapping(value = REQUEST_PREFIX + "/addItem")
 	TaotaoResult addItem(@RequestBody TbItem item, @RequestParam("desc") String desc);
+
+	/**
+	 * 添加商品
+	 * @param itemId
+	 * @return
+	 */
+	@RequestMapping(value = REQUEST_PREFIX + "/getItemDescById")
+	TbItemDesc getItemDescById(@RequestParam("itemId") Long itemId);
 }
