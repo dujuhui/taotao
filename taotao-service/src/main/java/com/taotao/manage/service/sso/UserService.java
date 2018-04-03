@@ -17,14 +17,14 @@ public interface UserService {
 	 *
 	 */
 	@RequestMapping(value = REQUEST_PREFIX + "/checkData")
-	TaotaoResult checkData(@RequestParam("parentId") String data, @RequestParam("parentId") int type);
+	TaotaoResult checkData(@RequestParam("data") String data, @RequestParam("type") int type);
 
 	@RequestMapping(value = REQUEST_PREFIX + "/register")
 	TaotaoResult register(@RequestBody TbUser user);
 
 	@RequestMapping(value = REQUEST_PREFIX + "/login")
-	TaotaoResult login(@RequestParam("parentId") String username, @RequestParam("parentId") String password);
+	TaotaoResult login(@RequestParam("username") String username, @RequestParam("password") String password);
 
 	@RequestMapping(value = REQUEST_PREFIX + "/getUserByToken")
-	TaotaoResult getUserByToken(@RequestParam("parentId") String token);
+	TaotaoResult getUserByToken(@RequestParam("token") String token);
 }
