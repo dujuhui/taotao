@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class UserServiceImpl implements UserService {
 
+
     @Autowired
     private TbUserMapper userMapper;
     @Autowired
@@ -154,4 +155,11 @@ public class UserServiceImpl implements UserService {
         //return TaotaoResult.ok(json);
     }
 
+
+    @Override
+    public TaotaoResult loginOut(String token) {
+        //删除redis里的token信息
+        redisTemplate.delete(USER_SESSION + ":" + token);
+        return TaotaoResult.ok();
+    }
 }

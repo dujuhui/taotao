@@ -56,8 +56,8 @@
         </div>
     </div>
 </form>
-<script type="text/javascript">
-	var redirectUrl = "${redirect}";
+<script th:inline="javascript">
+	var redirectUrl = [[${redirect}]];
 	var LOGIN = {
 			checkInput:function() {
 				if ($("#loginname").val() == "") {
@@ -76,7 +76,7 @@
 				$.post("/user/login", $("#formlogin").serialize(),function(data){
 					if (data.status == 200) {
 						alert("登录成功！");
-						if (redirectUrl == "") {
+						if (redirectUrl == "" || redirectUrl == null) {
 							location.href = "http://localhost:1004/index";
 						} else {
 							location.href = redirectUrl;

@@ -4,13 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.taotao.common.entity.TaotaoResult;
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.manage.pojo.TbUser;
 import com.taotao.manage.service.sso.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,7 +62,7 @@ public class UserController {
 		return result;
 	}
 	
-	/*@RequestMapping(value="/user/token/{token}", method=RequestMethod.GET, 
+	@RequestMapping(value="/user/token/{token}", method=RequestMethod.GET,
 			//指定返回响应数据的content-type
 			produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
@@ -73,9 +73,18 @@ public class UserController {
 			return callback + "(" + JsonUtils.objectToJson(result) + ");";
 		}
 		return JsonUtils.objectToJson(result);
-	}*/
+	}
+
+	@RequestMapping(value="/user/loginOut")
+	public String loginOut(HttpServletRequest request) {
+		String token = CookieUtils.getCookieValue(request, TOKEN_KEY);
+		if(StringUtils.isNotBlank(token)){
+			userService.loginOut(token);
+		}
+		return "login";
+	};
 	//jsonp的第二种方法，spring4.1以上版本使用
-	@RequestMapping(value="/user/token/{token}", method=RequestMethod.GET)
+	/*@RequestMapping(value="/user/token/{token}", method=RequestMethod.GET)
 	@ResponseBody
 	public Object getUserByToken(@PathVariable String token, String callback) {
 		TaotaoResult result = userService.getUserByToken(token);
@@ -87,7 +96,7 @@ public class UserController {
 			return mappingJacksonValue;
 		}
 		return result;
-	}
+	}*/
 	
 	
 	

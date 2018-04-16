@@ -6,6 +6,7 @@ import com.taotao.manage.service.ContentService;
 import com.taotao.portal.pojo.AD1Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +37,7 @@ public class IndexController {
     @Autowired
     private ContentService contentService;
 
-    @RequestMapping("/index")
+    @RequestMapping(value="/index"/*, produces= MediaType.APPLICATION_JSON_UTF8_VALUE*/)
     public String showIndex(Model model){
         //根据cid查询轮播图内容列表
         List<TbContent> contentList = contentService.getContentByCid(AD1_CATEGORY_ID);
@@ -58,7 +59,7 @@ public class IndexController {
         //把列表转换成json数据
         String ad1Json = JsonUtils.objectToJson(ad1Nodes);
         //把json数据传递给页面
-        model.addAttribute("ad1", ad1Json);
+        model.addAttribute("ad1", ad1Nodes);
         return "index";
     }
 }

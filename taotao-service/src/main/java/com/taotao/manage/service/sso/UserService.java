@@ -27,4 +27,7 @@ public interface UserService {
 
 	@RequestMapping(value = REQUEST_PREFIX + "/getUserByToken")
 	TaotaoResult getUserByToken(@RequestParam("token") String token);
+
+	@RequestMapping(value = REQUEST_PREFIX + "/loginOut")
+	TaotaoResult loginOut(@RequestParam("token") String token);
 }
