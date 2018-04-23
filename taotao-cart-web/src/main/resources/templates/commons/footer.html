@@ -1,3 +1,4 @@
+<html xmlns:th="http://www.thymeleaf.org">
 <div class="w" clstag="homepage|keycount|home2013|37a">
 	<div id="service-2013">
 		<dl class="fore1">
@@ -68,7 +69,8 @@
 	</div>
 </div>
 <div class="w" clstag="homepage|keycount|home2013|38a">
-	<jsp:include page="footer-links.jsp"></jsp:include>
+	<div th:include="footer-links.html"></div>
+	<!--<jsp:include page="footer-links.jsp"></jsp:include>-->
 </div>
 <script type="text/javascript" src="/js/jquery-1.6.4.js"></script>
 <script type="text/javascript" src="/js/jquery-extend.js"></script>
@@ -86,3 +88,4 @@ if(_searchValue.length == 0){
 $("#key").val(_searchValue).bind("focus",function(){if (this.value==B){this.value="";this.style.color="#333"}}).bind("blur",function(){if (!this.value){this.value=B;this.style.color="#999"}});
 })();
 </script>
+</html>

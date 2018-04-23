@@ -1,6 +1,9 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
 <script type="text/javascript" src="/js/base-v1.js" charset="utf-8"></script>
 <!--shortcut start-->
-<jsp:include page="shortcut.jsp" />
+<div th:include="shortcut.html"></div>
+<!--<jsp:include page="shortcut.jsp" />-->
 <!--shortcut end-->
 <div id="o-header-2013">
 	<div class="w" id="header-2013">
@@ -153,3 +156,4 @@
 <script type="text/javascript">
 (function(){if(pageConfig.navId){var object=document.getElementById("nav-"+pageConfig.navId);if(object)object.className+=" curr";}})();
 </script>
+</html>

@@ -33,6 +33,7 @@ public class ItemController {
 		TbItemDesc tbItemDesc = itemService.getItemDescById(itemId);
 		//把数据传递给页面
 		model.addAttribute("item", item);
+		model.addAttribute("itemId", item.getId().toString());
 		model.addAttribute("itemDesc", tbItemDesc);
 		//返回逻辑视图
 		return "item";
